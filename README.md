@@ -256,6 +256,11 @@ To maximize project quality and target the content-based bonus points (2 of the 
 - `data/processed/feature_sets.json`: modelling numeric/categorical features, `log1p` variables, eliminated variables and reasons, category groupings.
 - Multivariate outliers are not removed in M1: they are analysed as DBSCAN noise in Module 2.
 
+### Module 2 outputs
+- Clustering view: 7 seller-profile features (`n_listings`, `price`, `savings`, `daysonmarket` log1p; `mileage`, `pct_is_new`, `listing_span_days` raw), median-imputed and standardized.
+- `data/processed/cluster_labels.csv`: `kmeans4` (chosen segmentation), `kmeans2`, `ward4`, `dbscan` (−1 = noise) per `sp_id`, for M4 cluster profiling and the cross-module discussion.
+- Key results: K-Means k=4 is the best method (silhouette 0.34, stable across seeds); DBSCAN (eps=0.6, MinPts=15) finds 2 cores + 22% noise; no clustering aligns with `seller_rating_class` (ARI ≤ 0.025).
+
 ### Engineering & Oral Exam Discipline
 - **Reproducibility:** Fix `random_state=42` across all splits, CV folds, and stochastic algorithms.
 - **Zero Data Leakage:** Fit all imputers, scalers, encoders, discretizers, and rule extractors strictly on training partitions whenever evaluating predictive performance.

@@ -1,0 +1,11 @@
+,noise %,core %,ratio
+n_listings > p95,4.0,5.2,0.8
+n_listings <= 10,16.5,5.1,3.2
+days on market > 120,22.7,0.3,75.7
+listing span > p95,20.8,0.5,41.6
+price > p95,10.5,3.4,3.1
+price < p5,11.9,3.1,3.8
+0 < pct_is_new < 0.2 (few new cars),4.1,2.3,1.8
+new_only seller,0.7,0.1,7.0
+mixed seller with mileage > 20k,12.1,8.5,1.4
+any trait above,73.2,24.9,2.9

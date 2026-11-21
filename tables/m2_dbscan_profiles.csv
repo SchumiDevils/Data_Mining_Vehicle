@@ -1,0 +1,4 @@
+,size,size %,n_listings,price_median,savings_amount_median,daysonmarket_median,mileage_median,pct_is_new,listing_span_days,vehicle_age_median,horsepower_median,pct_isCab,pct_salvage,franchise %,top body type,suv %,low %,medium %,high %
+noise,3045,22.0,39.0,19888.0,370.0,49.5,49752.5,0.0,520.0,4.0,248.0,0.1012658227848101,0.0,37.9,suv_crossover,53.8,19.2,48.2,32.6
+D0,6542,47.3,37.0,15239.5,644.75,34.0,79225.0,0.0,265.0,5.5,240.0,0.1206285155294693,0.0,24.3,suv_crossover,59.5,15.8,55.4,28.7
+D1,4256,30.7,193.0,29822.25,0.0,37.0,11.0,0.6586333720480062,407.0,0.0,250.0,0.11933452006024914,0.0,100.0,suv_crossover,79.7,22.5,58.3,19.1
