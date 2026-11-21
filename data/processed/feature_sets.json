@@ -1,0 +1,76 @@
+{
+  "target": "seller_rating_class",
+  "id": "sp_id",
+  "numeric_model": [
+    "n_listings",
+    "price_median",
+    "savings_amount_median",
+    "daysonmarket_median",
+    "mileage_median",
+    "owner_count_median",
+    "horsepower_median",
+    "city_fuel_economy_median",
+    "back_legroom_median",
+    "front_legroom_median",
+    "fuel_tank_volume_median",
+    "height_median",
+    "length_median",
+    "width_median",
+    "pct_isCab",
+    "pct_is_new",
+    "pct_salvage",
+    "pct_theft_title",
+    "listing_span_days"
+  ],
+  "categorical_model": [
+    "dominant_body_type",
+    "dominant_fuel_type",
+    "dominant_transmission",
+    "dominant_listing_color",
+    "franchise_status"
+  ],
+  "log1p_vars": [
+    "n_listings",
+    "price_median",
+    "savings_amount_median",
+    "daysonmarket_median",
+    "engine_displacement_median",
+    "city_fuel_economy_median",
+    "highway_fuel_economy_median",
+    "fuel_tank_volume_median",
+    "vehicle_age_median"
+  ],
+  "dropped_from_base": {
+    "dominant_wheel_system": "76% missing, MCAR-like"
+  },
+  "excluded_from_model": {
+    "year_median": "|rho_s|=0.98 with vehicle_age, 0.93 with mileage",
+    "vehicle_age_median": "|rho_s|=0.93 with mileage (kept for profiling)",
+    "n_listing_days": "|rho_s|=0.96 with n_listings",
+    "highway_fuel_economy_median": "|rho_s|=0.94 with city fuel economy",
+    "engine_displacement_median": "24.5% missing + redundant with fuel tank/fuel economy/horsepower",
+    "new_used_profile": "deterministic discretization of pct_is_new"
+  },
+  "category_groupings": {
+    "dominant_body_type": {
+      "coupe": "coupe_convertible",
+      "convertible": "coupe_convertible",
+      "van": "van_minivan",
+      "minivan": "van_minivan",
+      "hatchback": "hatchback_wagon",
+      "wagon": "hatchback_wagon"
+    },
+    "dominant_fuel_type": {
+      "biodiesel": "diesel",
+      "hybrid": "electrified",
+      "electric": "electrified"
+    },
+    "dominant_listing_color": {
+      "brown": "other",
+      "green": "other",
+      "gold": "other",
+      "teal": "other"
+    }
+  },
+  "notes": "clean_base keeps NaN; impute in downstream pipelines (M3: inside CV folds)."
+}

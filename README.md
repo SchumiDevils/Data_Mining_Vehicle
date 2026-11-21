@@ -25,22 +25,37 @@ The project analyzes the **Seller-Level Vehicle Dataset**, where each record cor
 
 **Only the written PDF report is evaluated** (source code and notebooks are not assessed).
 
+### Logistics, Deadlines & Submission
+- **Group:** min 2, max 3 people; register the group via the link on the course page.
+- **Deadlines (bonus track):**
+  - **15/11/2026:** mid-draft (Module 1 Data Understanding & Preparation + Module 2 Clustering) → **+0.5**
+  - **31/12/2026:** complete project → **+0.5**
+  - **No-bonus track:** complete project delivered **1 week before** the chosen oral exam date.
+  - Deadlines may change; the course main page is authoritative.
+- **Submission:** email the PDF to **both** `alessio.cascione@phd.unipi.it` and `riccardo.guidotti@unipi.it`.
+  - Subject: `[DM1 Project 26/27]` (from the 26/27 guidelines; the course exam page still shows the stale `[DM1 2025-2026] Project`; confirm with the instructor if in doubt).
+  - File name: `Project_Surname1_Surname2[_Surname3].pdf`.
+- **Oral exam:** registration on https://esami.unipi.it/; only possible after project delivery. It covers (1) theory (formulas/pseudocode on paper), (2) pen-and-paper exercises on the course algorithms, (3) discussion of the project's questionable steps/choices. An insufficient project must be redone on a new or substantially updated dataset.
+
 ### Format Constraints
-- **Format:** Single PDF document (recommended: LaTeX / Overleaf).
+- **Format:** Single PDF document (LaTeX / Overleaf suggested; no .doc, notebooks, or code).
 - **Page Limit:** **Maximum 20 pages** including all text, tables, and figures. **Title page and Table of Contents (Index) do not count** toward the 20-page limit.
-- **Typography & Layout:** Font size strictly **greater than 9pt** (recommended: `10pt`). **Multi-column layouts are allowed** (2-column LaTeX is recommended to organize figures and tables cleanly within 20 pages).
+- **Typography & Layout:** Guidelines recommend a font size **above 9pt**; we use `10pt`. **Multi-column layouts are allowed** (2-column LaTeX is recommended to organize figures and tables cleanly within 20 pages).
 
 ### Mandatory Content Rules
 1. **Justify every choice:** Explain variable retention/elimination, cleaning, imputation, transformations, feature selection, distance metrics, and hyperparameter settings.
 2. **Report all tested configurations:** Never report only the winning model/configuration; document the parameter ranges tested and justify why the final configuration was chosen.
 3. **Discuss every result honestly:** Analyze weak or unconvincing outcomes fairly and attribute limitations appropriately (e.g., dataset noise/overlap vs. algorithm assumptions).
 4. **No uncommented visuals:** Every figure and table must be crisp, readable, explicitly referenced, and analyzed in the text.
-5. **Non-lecture methodologies:** Additional tools, feature selection techniques, plots, or algorithms not covered in lectures are permitted, provided prior approval is requested from the instructor.
+5. **Non-lecture methodologies:** Additional tools, feature selection techniques, plots, or algorithms not covered in lectures are permitted; the instructor suggests emailing them **beforehand** (we will do so for anything outside the lectures).
+6. **Free organization:** The suggested analyses are guidance; content may be organized freely, but `seller_rating_class` classification is mandatory. Extra classification targets are optional; the regression target is free.
 
 ### Grading Structure
 Each of the 4 analytical modules is graded out of **30 points**, averaged together, plus bonus points:
 
 $$\text{Project Mark} = \frac{\text{M1} + \text{M2} + \text{M3} + \text{M4}}{4} + \text{Bonus (up to 3 pts)}$$
+
+Bonus breakdown: Innovation 0.5 + Experimentation 0.5 + Performance 0.5 + Appearance/Summary/Organization 0.5 + on-time delivery (mid-draft 0.5 + final 0.5) = **3.0**.
 
 ---
 
@@ -72,7 +87,8 @@ $$\text{Project Mark} = \frac{\text{M1} + \text{M2} + \text{M3} + \text{M4}}{4} 
    - Explore univariate and bivariate distributions via readable histograms, boxplots, and scatter/grouped plots highlighting skewness, multimodality, and relationships with `seller_rating_class`.
 
 3. **Data Quality Assessment & Cleaning**
-   - **Missing values:** Detect explicit (`NaN`) and implicit (`0`, `-1`, `"Unknown"`, empty strings) missing values; analyze missingness rates and patterns; justify drop vs. imputation strategies (ensuring imputation statistics are fit strictly on training folds during Module 3).
+   - **Missing values:** Detect explicit (`NaN`) and implicit (`0`, `-1`, `"Unknown"`, empty strings) missing values; analyze missingness rates and patterns (including whether missingness depends on `seller_rating_class`); justify drop vs. imputation strategies.
+     - **Leakage rule:** Module 1 saves a **clean but un-imputed base** (`NaN` kept). Imputation may be fit on the full data only for the unsupervised views (M2 clustering, M4 frequent patterns); for M3 and the M4 rule-based classifier it is re-fit inside the training folds. Row drops in M1 may only use row-local criteria (corrupted/impossible entries), never dataset-wide statistics tied to the target.
    - **Duplicates:** Check exact row duplicates and duplicate `sp_id` identifiers.
    - **Syntactic & semantic inconsistencies:** Flag impossible values (e.g., negative prices/mileage/age, proportions outside `[0, 1]`, contradictions between new/used status and mileage/age, invalid engine or dimension values) and justify corrections.
    - **Outliers:** Identify univariate (IQR/z-score) and multivariate anomalies; distinguish real extreme sellers (e.g., luxury or high-volume franchises) from corrupted entries; justify retaining, capping, or removing them per downstream task.
@@ -87,6 +103,7 @@ $$\text{Project Mark} = \frac{\text{M1} + \text{M2} + \text{M3} + \text{M4}}{4} 
 5. **Pairwise Correlations & Feature Elimination**
    - Compute Pearson and Spearman correlation matrices and visualize them with a legible heatmap.
    - Analyze strongly correlated pairs (e.g., $|r| > 0.85$ or domain-redundant specs) and explicitly justify which variables to eliminate vs. retain.
+   - Elimination here is **unsupervised** (feature–feature redundancy only). Feature–target associations are reported descriptively; any target-driven feature selection happens inside the M3 CV pipeline.
 
 ---
 
@@ -116,6 +133,7 @@ $$\text{Project Mark} = \frac{\text{M1} + \text{M2} + \text{M3} + \text{M4}}{4} 
 4. **Hierarchical Clustering**
    - Justify chosen attributes and **distance functions** (e.g., Euclidean vs. Manhattan or Cosine).
    - Compute and analyze **several dendrograms** comparing linkage criteria (**Single, Complete, Average, Ward**).
+   - **Ward is defined only with Euclidean distance** (it minimizes the within-cluster variance increase); Manhattan/Cosine are paired only with Single/Complete/Average.
    - Discuss structural phenomena (e.g., chaining in Single linkage vs. compact clusters in Ward/Complete), justify chosen cut thresholds, and profile resulting clusters.
 
 5. **Final Clustering Discussion**
@@ -135,8 +153,8 @@ $$\text{Project Mark} = \frac{\text{M1} + \text{M2} + \text{M3} + \text{M4}}{4} 
 
 2. **Mandatory Classifiers & Parameter Sweeps** *(list all tested configurations and justify the best)*
    - **Decision Trees:** Tune splitting criterion (`gini`, `entropy`), `max_depth`, `min_samples_split`, `min_samples_leaf`, and pruning (`ccp_alpha`). Compare unpruned vs. pruned performance to demonstrate overfitting control.
-   - **K-Nearest Neighbors (KNN):** Tune `n_neighbors` ($k$), distance metric (`euclidean`, `manhattan`, `minkowski`), and weighting (`uniform`, `distance`). Plot CV performance vs. $k$.
-   - **Naïve Bayes:** Select appropriate variant(s) for the feature types (e.g., `GaussianNB` on continuous/transformed features, `CategoricalNB`/`MultinomialNB` on categorical/discretized features) and tune smoothing (`var_smoothing` / `alpha`). Discuss how well conditional independence and distributional assumptions hold.
+   - **K-Nearest Neighbors (KNN):** Tune `n_neighbors` ($k$), the Minkowski order `p` (`p=1` Manhattan, `p=2` Euclidean; listing `minkowski` as a third metric is redundant since it defaults to `p=2`), and weighting (`uniform`, `distance`). Features must be scaled (KNN is distance-based). Plot CV performance vs. $k$.
+   - **Naïve Bayes:** Select appropriate variant(s) for the feature types: `GaussianNB` on continuous/transformed features (tune `var_smoothing`) and `CategoricalNB` on categorical/discretized features (tune `alpha`; bins fit on training folds only). `MultinomialNB` is for counts, not for one-hot discretized attributes. Discuss how well conditional independence and distributional assumptions hold.
    - *(Optional Extra Task):* Classify a second meaningful categorical target (e.g., franchise status or inventory profile) if page budget permits.
 
 3. **Mandatory Classification Metrics & Insights**
@@ -151,6 +169,8 @@ $$\text{Project Mark} = \frac{\text{M1} + \text{M2} + \text{M3} + \text{M4}}{4} 
 1. **Task Setup**
    - Choose **one meaningful continuous target** (motivated by Module 1 analysis, e.g., average seller price) and justify the choice.
    - Use the **exact same target variable** for both single and multiple regression.
+   - Exclude predictors that are near-deterministic derivations of the target (e.g., another statistic of the same quantity, such as median vs. mean price), which would inflate $R^2$ without insight.
+   - Use the same train/test split for single and multiple regression so the models can be compared directly.
 
 2. **Single Linear Regression**
    - Choose **one independent variable** justified via correlation and domain relevance.
@@ -176,6 +196,7 @@ $$\text{Project Mark} = \frac{\text{M1} + \text{M2} + \text{M3} + \text{M4}}{4} 
 1. **Transactional Encoding & Discretization**
    - Convert seller records into itemsets combining categorical features, binary indicators, `seller_rating_class`, and discretized key numeric variables.
    - Justify binning choices (e.g., quantile vs. domain-defined bins) and keep attribute-prefixed item names (e.g., `price=high`, `mileage=low`, `rating=high`).
+   - For the rule-based classifier (step 4), bin edges and rules are computed on the **M3 training split only**, and `rating=*` items are excluded from antecedents.
 
 2. **Frequent Pattern Extraction & Discussion**
    - Extract frequent itemsets (using Apriori / FP-Growth) across varying `min_sup` values (optionally comparing frequent, closed, and maximal itemsets).
@@ -198,7 +219,7 @@ $$\text{Project Mark} = \frac{\text{M1} + \text{M2} + \text{M3} + \text{M4}}{4} 
 
 ## 5. Quality & Bonus Optimization Criteria
 
-To maximize project quality and target the content-based bonus points (out of the 3 total bonus points):
+To maximize project quality and target the content-based bonus points (2 of the 3 total bonus points; the remaining 1 point is on-time delivery, see Section 2):
 
 - **Innovation (+0.5 pts):** Connect modules into a cohesive narrative (e.g., profiling Module 2 clusters using Module 4 rules, benchmarking rule-based classification against Module 3 models, or adding instructor-approved analyses).
 - **Experimentation (+0.5 pts):** Include optional algorithms (Bisecting K-Means or X-Means, OPTICS), systematic ablation/sensitivity checks (raw vs. log-scaled, with vs. without outliers), and well-documented parameter grids.
@@ -221,9 +242,19 @@ To maximize project quality and target the content-based bonus points (out of th
 │   ├── 02_clustering.ipynb
 │   ├── 03_classification_regression.ipynb
 │   └── 04_pattern_mining.ipynb
-├── src/                      # Shared preprocessing, metrics, and plotting utilities
-└── figures/                  # Exported vector figures (PDF/SVG) for LaTeX report
+├── src/                      # Shared preprocessing, metrics, and plotting utilities (plot_style.py)
+├── figures/                  # Exported vector figures (PDF + PNG preview) for LaTeX report
+└── tables/                   # CSV tables backing the report's tables
 ```
+
+### Environment
+- Python 3.9 conda env `tf` (`C:\Users\crist\miniconda3\envs\tf`): pandas 2.1, numpy 1.25, scipy 1.13, scikit-learn 1.6, matplotlib 3.9, seaborn 0.13, jupyter.
+- **Missing for Module 4:** `mlxtend` (Apriori/FP-Growth, association rules).
+
+### Module 1 outputs (consumed by Modules 2–4)
+- `data/processed/clean_base.csv`: cleaned, `sp_id` index, **NaN kept** (impute downstream; M3 inside CV folds).
+- `data/processed/feature_sets.json`: modelling numeric/categorical features, `log1p` variables, eliminated variables and reasons, category groupings.
+- Multivariate outliers are not removed in M1: they are analysed as DBSCAN noise in Module 2.
 
 ### Engineering & Oral Exam Discipline
 - **Reproducibility:** Fix `random_state=42` across all splits, CV folds, and stochastic algorithms.
@@ -235,6 +266,7 @@ To maximize project quality and target the content-based bonus points (out of th
 
 ## 7. Project Quality & Compliance Checklist
 
+- [ ] **Submission:** mid-draft by 15/11/2026, final by 31/12/2026; emailed to both instructors with the correct subject and `Project_Surname1_Surname2.pdf` file name.
 - [ ] **Report Constraints:** ≤20 counted pages (excluding Title Page & Index); font size >9pt; PDF only; every plot/table is legible, referenced, and commented; every choice and tested parameter range is documented and justified.
 - [ ] **Module 1:** Variable semantics table; univariate & bivariate stats/plots; missing values, duplicates, inconsistencies, and outliers audited and resolved; transformations justified; correlation heatmap and feature elimination explained.
 - [ ] **Module 2:** K-Means (mandatory), DBSCAN (mandatory), Hierarchical with *multiple dendrograms* (mandatory); attributes, distances, and parameters justified; full comparative "best algorithm" discussion across aggregate metrics, cluster distributions, and dataset geometry.

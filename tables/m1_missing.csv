@@ -1,0 +1,21 @@
+,NaN,unknown,empty string,total,%
+dominant_wheel_system,10518,0,0,10518,75.98
+engine_displacement_median,3393,0,0,3393,24.51
+dominant_listing_color,0,1510,0,1510,10.91
+owner_count_median,39,0,0,39,0.28
+pct_isCab,27,0,0,27,0.2
+pct_theft_title,27,0,0,27,0.2
+pct_salvage,27,0,0,27,0.2
+back_legroom_median,19,0,0,19,0.14
+city_fuel_economy_median,16,0,0,16,0.12
+highway_fuel_economy_median,16,0,0,16,0.12
+front_legroom_median,7,0,0,7,0.05
+fuel_tank_volume_median,7,0,0,7,0.05
+dominant_transmission,0,6,0,6,0.04
+height_median,6,0,0,6,0.04
+width_median,6,0,0,6,0.04
+length_median,6,0,0,6,0.04
+horsepower_median,6,0,0,6,0.04
+dominant_fuel_type,0,1,0,1,0.01
+vehicle_age_median,1,0,0,1,0.01
+mileage_median,1,0,0,1,0.01

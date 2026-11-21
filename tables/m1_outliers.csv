@@ -1,0 +1,25 @@
+,scale,IQR outliers (raw scale),IQR outliers (used scale),% (used scale)
+n_listings,log1p,641,1,0.01
+price_median,log1p,171,70,0.51
+savings_amount_median,log1p,218,0,0.0
+daysonmarket_median,log1p,1110,842,6.08
+mileage_median,raw,0,0,0.0
+year_median,raw,65,65,0.47
+vehicle_age_median,log1p,62,0,0.0
+owner_count_median,raw,51,51,0.37
+horsepower_median,raw,62,62,0.45
+engine_displacement_median,log1p,314,60,0.57
+city_fuel_economy_median,log1p,127,127,0.92
+highway_fuel_economy_median,log1p,129,71,0.51
+back_legroom_median,raw,284,284,2.05
+front_legroom_median,raw,540,540,3.9
+fuel_tank_volume_median,log1p,806,665,4.81
+height_median,raw,164,164,1.19
+length_median,raw,921,921,6.66
+width_median,raw,177,177,1.28
+pct_isCab,raw,670,670,4.84
+pct_is_new,raw,0,0,0.0
+pct_salvage,raw,1242,1242,8.97
+pct_theft_title,raw,2110,2110,15.24
+n_listing_days,raw,128,128,0.92
+listing_span_days,raw,614,614,4.44

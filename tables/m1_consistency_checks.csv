@@ -1,0 +1,15 @@
+rule,violations,action
+negative values in numeric columns,0,none found
+"pct_* outside [0, 1]",0,none found
+new_used_profile inconsistent with pct_is_new,0,none found: profile is a deterministic function of pct_is_new
+n_listing_days > n_listings or > listing_span_days + 1,0,none found
+savings_amount_median > price_median,0,none found
+front_legroom_median > 46 in,2,ERROR -> NaN (passenger-car maximum is about 46 in; 54/67 in on an SUV is impossible)
+non-EV fuel economy > 60 MPG,2,ERROR -> NaN for city and highway (MPGe-like values on a gasoline V8/V6 seller)
+EV fuel economy > 60 (MPGe),8,kept: MPGe is a valid EV measure
+highway < city fuel economy,18,kept: normal for hybrids/EVs and mixed inventories
+back_legroom_median == 0,3,kept: regular-cab pickups / cargo vans have no rear seat
+year_median < 1995 (classic cars),38,"kept: real classic-car dealers (coupes/convertibles, high prices)"
+year + age (median) outside 2018-2022,42,"kept: medians are not additive, so this is only a soft check"
+pct_is_new > 0.5 but mileage_median > 5000,338,"kept: is_new flags recent model years (age 0), not zero mileage"
+daysonmarket_median > listing_span_days,120,kept: days on market can start before the observation window

@@ -1,0 +1,9 @@
+variable,levels (incl. NaN),mode,mode %,NaN,'unknown'
+dominant_body_type,9,suv_crossover,64.4,0,0
+dominant_fuel_type,7,gasoline,98.7,0,1
+dominant_transmission,4,a,93.7,0,6
+dominant_wheel_system,6,,76.0,10518,0
+dominant_listing_color,11,white,37.3,0,1510
+franchise_status,2,franchise,50.6,0,0
+new_used_profile,3,used_only,53.3,0,0
+seller_rating_class,3,medium,54.7,0,0
