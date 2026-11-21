@@ -1,0 +1,13 @@
+rule,support,confidence,lift
+dealer=franchise ∧ dom=mid ∧ savings=none  →  segment=C0,0.12157769269666979,1.0,2.7309133951469717
+dom=mid ∧ inventory=mixed ∧ savings=none  →  segment=C0,0.12099978328397024,1.0,2.7309133951469717
+dom=low ∧ inventory=mixed ∧ savings=none  →  segment=C0,0.09976161236726143,1.0,2.7309133951469717
+dom=low ∧ price=high ∧ savings=high  →  segment=C1,0.020660261504009247,0.9794520547945206,3.7065486042975806
+dealer=franchise ∧ dom=low ∧ savings=high  →  segment=C1,0.027450697103229067,0.9768637532133676,3.696753672972293
+dealer=franchise ∧ inventory=used_only ∧ size=mid  →  segment=C1,0.025789207541717835,0.9754098360655737,3.69125160214755
+dom=high ∧ price=low ∧ span=high  →  segment=C2,0.04558260492667774,0.8379814077025233,9.04849970891266
+dom=high ∧ mileage=high ∧ span=high  →  segment=C2,0.04392111536516651,0.8351648351648352,9.018086437743225
+dom=high ∧ size=low ∧ span=high  →  segment=C2,0.03467456476197356,0.8013355592654424,8.652798866545647
+hp=low ∧ mileage=high ∧ span=low  →  segment=C3,0.06971032290688435,0.9846938775510206,3.555325338273025
+color=silver ∧ mileage=high ∧ span=low  →  segment=C3,0.02261070577187026,0.9842767295597484,3.553819188131351
+mileage=high ∧ price=low ∧ span=low  →  segment=C3,0.1576247923138048,0.9793536804308797,3.536044078822292

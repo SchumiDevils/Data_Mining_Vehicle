@@ -248,8 +248,7 @@ To maximize project quality and target the content-based bonus points (2 of the 
 ```
 
 ### Environment
-- Python 3.9 conda env `tf` (`C:\Users\crist\miniconda3\envs\tf`): pandas 2.1, numpy 1.25, scipy 1.13, scikit-learn 1.6, matplotlib 3.9, seaborn 0.13, jupyter.
-- **Missing for Module 4:** `mlxtend` (Apriori/FP-Growth, association rules).
+- Python 3.9 conda env `tf` (`C:\Users\crist\miniconda3\envs\tf`): pandas 2.1, numpy 1.25, scipy 1.13, scikit-learn 1.6, matplotlib 3.9, seaborn 0.13, jupyter, mlxtend 0.23.4 (Apriori, association rules).
 
 ### Module 1 outputs (consumed by Modules 2–4)
 - `data/processed/clean_base.csv`: cleaned, `sp_id` index, **NaN kept** (impute downstream; M3 inside CV folds).
@@ -266,6 +265,13 @@ To maximize project quality and target the content-based bonus points (2 of the 
 - `src/m3_utils.py`: `PriorCorrectedKNN` (KNN with a class-prior-corrected decision rule; also works around a scikit-learn 1.6 bug with string labels).
 - Classification (test macro-F1 / macro AUC): Decision Tree 0.437 / 0.63 (pruned, depth 5, balanced), KNN 0.433 / 0.64 (k=151, p=1, prior-corrected), CategoricalNB 0.414, GaussianNB 0.407; majority baseline 0.236. Best overall: pruned DT.
 - Regression on log1p(price): single OLS on mileage R² 0.75; multiple (mileage, horsepower, width, pct_is_new): OLS 0.876, DT 0.903, KNN 0.913.
+
+### Module 4 outputs
+- Encoding: one item per attribute (equal-frequency tertiles for skewed numerics, domain bins for savings, presence items for salvage/theft, Module 1 category groupings); items with support > 0.9 dropped (`trans=a`). Algorithm: Apriori (mlxtend FP-Growth ~70× slower on this dense data).
+- Descriptive mining: `min_sup` = 0.05 (6,835 itemsets, 1,042 maximal), `min_conf` = 0.6 (34,233 rules, 99.8% with lift > 1).
+- Rule-based rating classifier (trained on the M3 train split, CV-tuned): "most discriminative matching antecedent" aggregation, s = 0.005, L = 4 → test macro-F1 0.433 (ties DT/KNN); CBA-style per-class best-rule aggregation fails (≈ 0.24–0.28).
+- Imputation of masked values: price tertile 75.2% vs 35.1% mode baseline; body type 65.0% vs 64.2% (its determinants are not encoded).
+- Segment rules describe the M2 K-Means clusters (confidence 0.80–1.00).
 
 ### Engineering & Oral Exam Discipline
 - **Reproducibility:** Fix `random_state=42` across all splits, CV folds, and stochastic algorithms.

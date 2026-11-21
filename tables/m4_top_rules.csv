@@ -1,0 +1,13 @@
+rule,support,confidence,lift
+body=pickup_truck ∧ price=high  →  hp=high,0.052373040525897564,0.9602649006622517,3.004734859825396
+body=sedan ∧ hp=low ∧ mileage=high ∧ size=low  →  price=low,0.053239904644946906,0.9986449864498645,2.975514969312414
+body=suv_crossover ∧ dealer=independent ∧ price=low ∧ savings=low ∧ size=low  →  mileage=high,0.05230080184931012,0.9614873837981408,2.8846705361763467
+hp=high ∧ mileage=low ∧ savings=none ∧ span=high  →  price=high,0.06053601098027884,0.9610091743119266,2.88261105092091
+dealer=franchise ∧ savings=high  →  mileage=mid,0.051072744347323555,0.9489932885906041,2.8471855426874146
+dealer=franchise ∧ dom=high ∧ inventory=mixed ∧ price=high ∧ savings=none  →  mileage=low,0.08126851116087554,0.9477674810446504,2.8435078543782173
+trans=cvt  →  hp=low,0.05663512244455682,0.9256198347107438,2.777662122675228
+dealer=independent ∧ hp=low ∧ inventory=used_only ∧ price=low  →  body=sedan,0.08726432131763347,0.61010101010101,2.7745165186689493
+mileage=high ∧ price=low ∧ rating=high ∧ span=low  →  size=low,0.05035035758144911,0.9016817593790427,2.7011427386029188
+dom=high ∧ mileage=low ∧ size=high  →  savings=none,0.07057718702593369,0.9828973843058348,2.6678918609697395
+cab=high ∧ dealer=franchise ∧ hp=low  →  price=mid,0.050856028317561225,0.8410991636798089,2.541103387782539
+dealer=franchise ∧ inventory=mixed ∧ theft=yes  →  size=high,0.05396229141082135,0.8393258426966292,2.5203443905530234

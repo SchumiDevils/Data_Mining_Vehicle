@@ -1,0 +1,9 @@
+itemset,support,k
+dealer=franchise ∧ inventory=mixed ∧ mileage=low ∧ savings=none,0.3135880950660984,4
+dealer=independent ∧ inventory=used_only ∧ mileage=high ∧ price=low,0.2968287220978112,4
+body=suv_crossover ∧ dealer=franchise ∧ inventory=mixed ∧ savings=none,0.27190637867514267,4
+body=suv_crossover ∧ dealer=franchise ∧ inventory=mixed ∧ mileage=low,0.2628043054251246,4
+body=suv_crossover ∧ dealer=franchise ∧ mileage=low ∧ savings=none,0.2511016398179585,4
+body=suv_crossover ∧ inventory=mixed ∧ mileage=low ∧ savings=none,0.2495846276096222,4
+body=suv_crossover ∧ dealer=franchise ∧ inventory=mixed ∧ mileage=low ∧ savings=none,0.24951238893303473,5
+dealer=franchise ∧ inventory=mixed ∧ savings=none ∧ size=high,0.24821209275446074,4

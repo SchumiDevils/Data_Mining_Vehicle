@@ -1,0 +1,3 @@
+attribute,levels,masked,rules,coverage,accuracy (rules),accuracy (mode baseline),macro-F1 (rules),macro-F1 (mode baseline),mode
+price,3,2769,6393,1.0,0.7522571325388226,0.3506681112314915,0.7239501119761589,0.17308377896613192,price=low
+body,6,2769,6082,1.0,0.6500541711809318,0.6417479234380643,0.15484733753493596,0.13029769760962018,body=suv_crossover

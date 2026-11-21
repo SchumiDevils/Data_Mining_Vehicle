@@ -1,0 +1,10 @@
+rating,itemset,support,k
+rating=high,dealer=independent ∧ inventory=used_only ∧ rating=high,0.16058657805389004,3
+rating=high,inventory=used_only ∧ rating=high ∧ size=low,0.12923499241493897,3
+rating=high,dealer=independent ∧ rating=high ∧ size=low,0.12555081990897926,3
+rating=low,dealer=franchise ∧ inventory=mixed ∧ rating=low,0.09593296250812686,3
+rating=low,body=suv_crossover ∧ dealer=franchise ∧ rating=low,0.08213537527992487,3
+rating=low,dealer=independent ∧ inventory=used_only ∧ rating=low,0.0796070215993643,3
+rating=medium,dealer=franchise ∧ inventory=mixed ∧ rating=medium,0.2692335476414072,3
+rating=medium,dealer=independent ∧ inventory=used_only ∧ rating=medium,0.24915119555009752,3
+rating=medium,body=suv_crossover ∧ dealer=franchise ∧ rating=medium,0.24207180524452793,3
