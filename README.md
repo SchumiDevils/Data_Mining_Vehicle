@@ -261,6 +261,12 @@ To maximize project quality and target the content-based bonus points (2 of the 
 - `data/processed/cluster_labels.csv`: `kmeans4` (chosen segmentation), `kmeans2`, `ward4`, `dbscan` (−1 = noise) per `sp_id`, for M4 cluster profiling and the cross-module discussion.
 - Key results: K-Means k=4 is the best method (silhouette 0.34, stable across seeds); DBSCAN (eps=0.6, MinPts=15) finds 2 cores + 22% noise; no clustering aligns with `seller_rating_class` (ARI ≤ 0.025).
 
+### Module 3 outputs
+- `data/processed/split.csv`: the stratified 80/20 train/test split (`set` = train/test per `sp_id`); **Module 4's rule-based classifier must reuse it**.
+- `src/m3_utils.py`: `PriorCorrectedKNN` (KNN with a class-prior-corrected decision rule; also works around a scikit-learn 1.6 bug with string labels).
+- Classification (test macro-F1 / macro AUC): Decision Tree 0.437 / 0.63 (pruned, depth 5, balanced), KNN 0.433 / 0.64 (k=151, p=1, prior-corrected), CategoricalNB 0.414, GaussianNB 0.407; majority baseline 0.236. Best overall: pruned DT.
+- Regression on log1p(price): single OLS on mileage R² 0.75; multiple (mileage, horsepower, width, pct_is_new): OLS 0.876, DT 0.903, KNN 0.913.
+
 ### Engineering & Oral Exam Discipline
 - **Reproducibility:** Fix `random_state=42` across all splits, CV folds, and stochastic algorithms.
 - **Zero Data Leakage:** Fit all imputers, scalers, encoders, discretizers, and rule extractors strictly on training partitions whenever evaluating predictive performance.

@@ -1,0 +1,5 @@
+,CV macro-F1,test macro-F1,chosen configuration
+Decision Tree,0.419,0.437,"pre-pruned {'class_weight': 'balanced', 'criterion': 'gini', 'max_depth': 5, 'min_samples_leaf': 50, 'min_samples_split': 2}"
+KNN,0.434,0.433,"{'n_neighbors': 151, 'p': 1, 'prior_correction': True, 'weights': 'distance'}"
+GaussianNB,0.404,0.407,"{'priors': 'uniform', 'var_smoothing': 0.1}"
+CategoricalNB,0.416,0.414,"bins=3, alpha=0.01, fit_prior=True"

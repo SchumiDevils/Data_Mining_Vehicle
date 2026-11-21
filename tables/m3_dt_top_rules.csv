@@ -1,0 +1,6 @@
+class,n (train),purity,rule
+low,290,0.5,n_listings > 103.50 AND price <= 26596.75 AND horsepower <= 191.25 AND front_legroom > 42.12 AND pct_is_new <= 0.70
+medium,58,0.948,n_listings > 103.50 AND price > 26596.75 AND n_listings > 228.50 AND price > 36503.00 AND height <= 63.20
+medium,280,0.786,n_listings > 103.50 AND price > 26596.75 AND n_listings <= 228.50 AND pct_is_new <= 0.62 AND mileage > 13814.50
+high,279,0.652,n_listings <= 103.50 AND n_listings <= 17.50 AND mileage <= 79007.25 AND franchise_status_independent > 0.50 AND body_type_sedan <= 0.50
+high,53,0.604,n_listings <= 103.50 AND n_listings <= 17.50 AND mileage > 79007.25 AND savings_amount > 857.50 AND price > 15849.75
