@@ -1,0 +1,16 @@
+\section{Conclusions and limitations}\label{sec:concl}
+\paragraph{One story from four modules} Every analysis finds the same axis. The correlation blocks (\cref{sec:corr}), the two DBSCAN cores and the first K-Means and Ward split (\cref{sec:m2}), the most frequent itemsets (\cref{sec:freq}) and the price regressions (\cref{sec:reg}) all oppose large franchises with new cars to small independents with old ones. The modules also check each other: segments are confirmed by rules with confidence up to 1.00 (\cref{sec:segrules}); the fragile segment C2 is the one that DBSCAN calls noise, that disappears in the outlier test and that has the weakest rules; the rating rules, the trees and the effect sizes all place seller size first.
+
+\paragraph{The rating} Three families of methods (distances, trees, rules) and two ensembles reach at most 0.475 macro-F1 (Na\"ive Bayes about 0.41), so the limit lies mainly in the attributes: they describe what is sold and not how customers are served. Within this limit, the decision rule mattered more than the algorithm: tuning $\tau$ gave the tree and KNN more than any other choice. The strongest lesson on interpretation is the dealer-type paradox (\cref{sec:simpson}): a significant and repeatedly observed association changed sign after conditioning on size.
+
+\paragraph{The best algorithms} \emph{Clustering}: K-Means, $k=4$ (coverage, reproducibility, readable segments). \emph{Classification}: KNN with $\tau=0.8$ for prediction, with a 16-leaf tree as its readable companion. \emph{Regression}: KNN for error, Decision Tree as compromise, OLS for explanation. \emph{Patterns}: Apriori with equal-frequency bins; the aggregation of the rules is the critical choice of the classifier.
+
+\paragraph{Limitations}
+\begin{itemize}
+\item Seller-level medians hide inventory variance, and units are inferred.
+\item \emph{Low} is never identified well (recall $\leq0.46$): no attribute gives it a profile of its own.
+\item All associations are observational; we cannot say why small sellers are rated higher (service, number of reviews, selection). The number of reviews behind each rating is unknown.
+\item The test set was read more than once (baseline models, rules, extended models). Configurations were fixed by CV each time, and nested CV gives the same ranking, but the intervals of \cref{tab:ext} do not include model-selection uncertainty.
+\item C2 depends on the tail of two attributes; another scaling could absorb it.
+\end{itemize}
+Data on reviews, prices relative to the market, or response times would be the natural next step.

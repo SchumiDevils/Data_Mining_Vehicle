@@ -1,0 +1,10 @@
+\section{Executive summary}\label{sec:intro}
+The \emph{Seller-Level Vehicle Dataset} describes 13\,843 vehicle sellers through 24 numerical and 7 categorical attributes aggregated over their listings, plus an identifier and the target \attr{seller\_rating\_class} (\emph{low}, \emph{medium}, \emph{high}). We prepare the data (\cref{sec:m1}), segment the sellers (\cref{sec:m2}), predict the rating and the price (\cref{sec:m3}), mine patterns (\cref{sec:m4}) and connect the results (\cref{sec:concl}). One train/test split, one seed (42) and one clean base are shared by all analyses.
+
+\begin{itemize}
+\item \textbf{Structure.} The data are a continuum with two modes, new-car franchises and used-car independents. K-Means with $k=4$ is the finest partition that is reproducible and better than a null model; density-based methods detect anomalies rather than groups.
+\item \textbf{Rating.} It is weakly related to the attributes (largest effect size 0.08, cluster ARI $\leq0.025$). Standard grids reach macro-F1 0.41--0.44; a \emph{partial} prior correction and engineered attributes bring KNN to 0.464 (95\% CI 0.443--0.483), level with two ensembles used as a yardstick.
+\item \textbf{What drives it.} Seller size, inside every segment. The apparent advantage of independent dealers is a Simpson's paradox.
+\item \textbf{Price.} Four attributes explain 91\% of the variance of log price (KNN); mileage alone explains 75\%.
+\item \textbf{Patterns.} Rules rediscover the segments, impute the price tertile (75\% vs 35\% accuracy) and predict the rating as well as the baseline models.
+\end{itemize}

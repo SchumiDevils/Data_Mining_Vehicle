@@ -1,0 +1,95 @@
+\documentclass[10pt,a4paper,twocolumn]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper,top=1.9cm,bottom=2.0cm,left=1.75cm,right=1.75cm,columnsep=0.65cm,headheight=14pt]{geometry}
+\usepackage{newtxtext,newtxmath}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{booktabs,array,multirow,tabularx}
+\usepackage[table]{xcolor}
+\usepackage{caption}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{placeins}
+\usepackage{stfloats}
+\usepackage[hidelinks]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+
+\definecolor{accent}{HTML}{104281}
+\hypersetup{colorlinks=true,linkcolor=accent,urlcolor=accent,citecolor=accent}
+\graphicspath{{../figures/}}
+
+% every text element is set above 9pt
+\newcommand{\tabfont}{\fontsize{9.1}{10.7}\selectfont}
+\captionsetup{font={stretch=0.97},labelfont={bf,color=accent},skip=4pt}
+\DeclareCaptionFont{capfont}{\fontsize{9.2}{10.8}\selectfont}
+\captionsetup{font=capfont}
+
+\titleformat{\section}{\color{accent}\large\bfseries}{\thesection}{0.6em}{}
+\titleformat{\subsection}{\color{accent}\normalsize\bfseries}{\thesubsection}{0.5em}{}
+\titleformat{\paragraph}[runin]{\normalfont\bfseries}{}{0pt}{}[.]
+\titlespacing*{\section}{0pt}{1.1ex plus .4ex}{0.6ex}
+\titlespacing*{\subsection}{0pt}{0.9ex plus .3ex}{0.35ex}
+\titlespacing*{\paragraph}{0pt}{0.45ex plus .2ex}{0.5em}
+\setlist{nosep,leftmargin=1.2em}
+\setlength{\parskip}{0.15ex plus 0.1ex}
+\setlength{\parindent}{1em}
+\setlength{\textfloatsep}{8pt plus 2pt minus 2pt}
+\setlength{\floatsep}{7pt plus 2pt minus 2pt}
+\setlength{\intextsep}{7pt plus 2pt minus 2pt}
+\setlength{\dbltextfloatsep}{8pt plus 2pt minus 2pt}
+\setlength{\dblfloatsep}{7pt plus 2pt minus 2pt}
+\renewcommand{\topfraction}{0.92}\renewcommand{\dbltopfraction}{0.92}
+\renewcommand{\bottomfraction}{0.8}\renewcommand{\textfraction}{0.06}
+\renewcommand{\floatpagefraction}{0.8}\renewcommand{\dblfloatpagefraction}{0.8}
+\setcounter{topnumber}{4}\setcounter{dbltopnumber}{4}\setcounter{totalnumber}{6}
+\emergencystretch=1.5em
+
+\newcommand{\attr}[1]{\texttt{\small #1}}
+\newcommand{\code}[1]{\texttt{\small #1}}
+\newcommand{\tab}[1]{{\tabfont\setlength{\tabcolsep}{2.2pt}\input{tables/#1}}}
+\newcommand{\tabwide}[1]{{\tabfont\setlength{\tabcolsep}{5pt}\input{tables/#1}}}
+\newcommand{\tabtight}[1]{{\tabfont\setlength{\tabcolsep}{1.45pt}\input{tables/#1}}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\Fm}{F1\textsubscript{mac}}
+
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\small Data Mining 1 -- a.a.\ 2026/2027}
+\fancyhead[R]{\small Seller-Level Vehicle Dataset}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+
+\input{authors}
+
+\begin{document}
+\pagenumbering{roman}
+\begin{titlepage}
+\onecolumn\centering
+\vspace*{3.2cm}
+{\large University of Pisa\par}\vspace{0.3cm}
+{\large Data Mining 1 -- academic year 2026/2027\par}
+\vspace{2.4cm}
+{\color{accent}\rule{0.8\linewidth}{1.2pt}\par}\vspace{0.6cm}
+{\Huge\bfseries Seller-Level Vehicle Dataset\par}\vspace{0.4cm}
+{\LARGE Understanding, segmenting and predicting\\[2pt] the rating of vehicle sellers\par}\vspace{0.6cm}
+{\color{accent}\rule{0.8\linewidth}{1.2pt}\par}
+\vspace{2.4cm}
+{\Large\reportauthors\par}
+\vspace{1.2cm}
+{\large\reportdate\par}
+\vfill
+\end{titlepage}
+\onecolumn
+\tableofcontents
+\clearpage
+\twocolumn
+\pagenumbering{arabic}
+
+\input{sections/00_intro}
+\input{sections/01_understanding}
+\input{sections/02_clustering}
+\input{sections/03_supervised}
+\input{sections/04_patterns}
+\input{sections/05_conclusions}
+\end{document}

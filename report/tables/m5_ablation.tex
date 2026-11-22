@@ -1,0 +1,25 @@
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+Variant & DT & KNN & GNB \\
+\midrule
+reference (CV macro-F1) & 0.419 & 0.434 & 0.404 \\
+\midrule
+raw scale, no scaling & -- & \textbf{$-$0.063} & \textbf{$-$0.097} \\
+raw scale, standardized & -- & $-$0.003 & \textbf{$-$0.014} \\
+log1p, min-max & -- & \textbf{$-$0.022} & $-$0.002 \\
+log1p, robust scaler & -- & \textbf{$-$0.009} & $-$0.002 \\
+\midrule
+winsorized at $p_1/p_{99}$ & 0.000 & +0.001 & $-$0.002 \\
+DBSCAN noise removed from training & $-$0.018 & \textbf{$-$0.010} & \textbf{$-$0.014} \\
+\midrule
+$-$ seller size & \textbf{$-$0.040} & \textbf{$-$0.025} & \textbf{$-$0.021} \\
+$-$ price, turnover, wear (6) & \textbf{$-$0.029} & $-$0.006 & \textbf{$-$0.024} \\
+$-$ vehicle specifications (8) & $-$0.001 & 0.000 & $-$0.006 \\
+$-$ vehicle history (4) & 0.000 & \textbf{$-$0.009} & $-$0.007 \\
+$-$ categoricals (5) & \textbf{$-$0.001} & $-$0.007 & -- \\
+only seller size & \textbf{$-$0.062} & \textbf{$-$0.069} & \textbf{$-$0.048} \\
+\midrule
+$+$ 12 engineered attributes & $-$0.002 & +0.003 & +0.012 \\
+$+$ K-Means segment and distances & \textbf{+0.006} & $-$0.005 & $-$0.009 \\
+\bottomrule
+\end{tabular}

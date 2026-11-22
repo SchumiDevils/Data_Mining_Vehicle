@@ -1,0 +1,18 @@
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.72\linewidth}rrr@{}}
+\toprule
+Rule & sup & conf & lift \\
+\midrule
+body=pickup $\wedge$ price=high $\rightarrow$ hp=high & 0.052 & 0.96 & 3.00 \\
+body=sedan $\wedge$ hp=low $\wedge$ mileage=high $\wedge$ size=low $\rightarrow$ price=low & 0.053 & 1.00 & 2.98 \\
+body=SUV $\wedge$ dealer=independent $\wedge$ price=low $\wedge$ savings=low $\wedge$ size=low $\rightarrow$ mileage=high & 0.052 & 0.96 & 2.88 \\
+hp=high $\wedge$ mileage=low $\wedge$ savings=none $\wedge$ span=high $\rightarrow$ price=high & 0.061 & 0.96 & 2.88 \\
+dealer=franchise $\wedge$ savings=high $\rightarrow$ mileage=mid & 0.051 & 0.95 & 2.85 \\
+dealer=franchise $\wedge$ dom=high $\wedge$ inventory=mixed $\wedge$ price=high $\wedge$ savings=none $\rightarrow$ mileage=low & 0.081 & 0.95 & 2.84 \\
+trans=cvt $\rightarrow$ hp=low & 0.057 & 0.93 & 2.78 \\
+dealer=independent $\wedge$ hp=low $\wedge$ inventory=used $\wedge$ price=low $\rightarrow$ body=sedan & 0.087 & 0.61 & 2.77 \\
+mileage=high $\wedge$ price=low $\wedge$ rating=high $\wedge$ span=low $\rightarrow$ size=low & 0.050 & 0.90 & 2.70 \\
+dom=high $\wedge$ mileage=low $\wedge$ size=high $\rightarrow$ savings=none & 0.071 & 0.98 & 2.67 \\
+cab=high $\wedge$ dealer=franchise $\wedge$ hp=low $\rightarrow$ price=mid & 0.051 & 0.84 & 2.54 \\
+dealer=franchise $\wedge$ inventory=mixed $\wedge$ theft=yes $\rightarrow$ size=high & 0.054 & 0.84 & 2.52 \\
+\bottomrule
+\end{tabular}

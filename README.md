@@ -241,10 +241,12 @@ To maximize project quality and target the content-based bonus points (2 of the 
 │   ├── 01_data_understanding_prep.ipynb
 │   ├── 02_clustering.ipynb
 │   ├── 03_classification_regression.ipynb
-│   └── 04_pattern_mining.ipynb
+│   ├── 04_pattern_mining.ipynb
+│   └── 05_quality_extensions.ipynb   # Section 5 extras; RECOMPUTE = False loads saved results
 ├── src/                      # Shared preprocessing, metrics, and plotting utilities (plot_style.py)
 ├── figures/                  # Exported vector figures (PDF + PNG preview) for LaTeX report
-└── tables/                   # CSV tables backing the report's tables
+├── tables/                   # CSV tables backing the report's tables
+└── report/                   # LaTeX report (main.tex, sections/, make_tables.py; build with latexmk -pdf -outdir=build main.tex)
 ```
 
 ### Environment
@@ -272,6 +274,14 @@ To maximize project quality and target the content-based bonus points (2 of the 
 - Rule-based rating classifier (trained on the M3 train split, CV-tuned): "most discriminative matching antecedent" aggregation, s = 0.005, L = 4 → test macro-F1 0.433 (ties DT/KNN); CBA-style per-class best-rule aggregation fails (≈ 0.24–0.28).
 - Imputation of masked values: price tertile 75.2% vs 35.1% mode baseline; body type 65.0% vs 64.2% (its determinants are not encoded).
 - Segment rules describe the M2 K-Means clusters (confidence 0.80–1.00).
+
+### Section 5 outputs (notebook 05, report)
+- `notebooks/05_quality_extensions.ipynb` + `src/m5_utils.py`: cluster null model, stability and X-Means; M3 ablations; 12 engineered features; tunable prior correction P(c|x)/P(c)^τ; nested CV; bootstrap CIs; ordinal, learning-curve and agreement analyses; binning and regression ablations. Modules 1–4 outputs are unchanged.
+- **Do not set `RECOMPUTE = True` on a laptop without care:** the full run needs several GB of RAM and ~15 min of CPU (keep `N_JOBS` ≤ 2). The default loads `tables/m5_*.csv` and takes seconds.
+- Extended classifiers (test macro-F1, 95% CI): KNN τ = 0.8 + engineered **0.464** [0.443, 0.483]; DT τ = 0.7 (16 leaves) 0.444; statistically level with the random forest (0.475) and gradient boosting (0.466), used only as references. Cost: lower `low` recall.
+- **Simpson's paradox:** odds ratio of `high` for franchise vs independent is 0.53 crude, 1.73 adjusted for size deciles. Seller size, not dealer type, drives the rating.
+- Random forest, gradient boosting, nested CV, bootstrap, ordinal decomposition and Mantel–Haenszel may be outside the lectures: **email the instructor before submitting** (Section 2, rule 5).
+- Report: 18 counted pages. Fill in `report/authors.tex` and rename the PDF before submission.
 
 ### Engineering & Oral Exam Discipline
 - **Reproducibility:** Fix `random_state=42` across all splits, CV folds, and stochastic algorithms.

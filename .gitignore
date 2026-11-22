@@ -33,3 +33,6 @@ desktop.ini
 *.fls
 *.bbl
 *.blg
+
+report/build/
+report/build.log

@@ -1,0 +1,13 @@
+\begin{tabular}{@{}llrrrrrrrrrrr@{}}
+\toprule
+Method & Parameters & Clusters & Noise \% & Silh. & DB & SSE & min \% & max \% & ARI$_\mathrm{KM4}$ & ARI$_\mathrm{rating}$ & ARI$_\mathrm{franchise}$ & ARI$_\mathrm{new/used}$ \\
+\midrule
+K-Means & $k$=2 & 2 & 0 & 0.421 & 0.95 & 52\,824 & 43.7 & 56.3 & 0.46 & 0.006 & 0.70 & 0.83 \\
+K-Means & $k$=4 & 4 & 0 & 0.343 & 1.17 & 36\,131 & 9.3 & 36.6 & 1.00 & 0.014 & 0.43 & 0.43 \\
+Bisecting K-Means & $k$=4 & 4 & 0 & 0.260 & 1.57 & 40\,521 & 8.8 & 34.9 & 0.72 & 0.004 & 0.47 & 0.50 \\
+DBSCAN & $\varepsilon{=}0.6$, MinPts$=$15 & 2 & 22 & 0.493 & 0.74 & 25\,566 & 30.7 & 47.3 & 0.58 & 0.005 & 0.50 & 0.62 \\
+Hierarchical & Ward, $k$=4 & 4 & 0 & 0.318 & 1.21 & 39\,098 & 5.5 & 35.5 & 0.76 & 0.007 & 0.48 & 0.48 \\
+Hierarchical & Complete, $k$=4 & 4 & 0 & 0.156 & 2.03 & 88\,101 & 0.0 & 88.6 & 0.05 & 0.024 & 0.00 & $-$0.00 \\
+Hierarchical & Single, $k$=4 & 4 & 0 & 0.531 & 0.29 & 96\,611 & 0.0 & 100.0 & 0.00 & 0.000 & 0.00 & $-$0.00 \\
+\bottomrule
+\end{tabular}
