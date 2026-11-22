@@ -57,18 +57,18 @@ CategoricalNB (72) & bins; $\alpha$; priors & bins: \textbf{3} .416, 4 .413, 5 .
 \begin{table*}[t]
 \centering
 \caption{Test set, baseline-grid models: overall metrics and precision/recall/F1 per class (best of each grid by CV macro-F1).}\label{tab:test}
-\tabtight{m3_test}
+\tabmid{m3_test}
 \end{table*}
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=0.95\textwidth]{m3_confusion}
+\includegraphics[width=0.95\textwidth]{report_confusion}
 \caption{Confusion matrices on the test set (counts and row percentages).}\label{fig:conf}
 \end{figure*}
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=0.95\textwidth]{m3_roc}
+\includegraphics[width=0.95\textwidth]{report_roc}
 \caption{One-vs-rest ROC curves with per-class, micro and macro AUC (test set).}\label{fig:roc}
 \end{figure*}
 
@@ -113,7 +113,7 @@ $\tau=0$ is the plain rule and $\tau=1$ the prior-corrected rule of KNN. For the
 \tabtight{m5_nested}
 \end{table}
 
-\paragraph{Test set} The test set had been used once for the baselines (\cref{tab:test}); here it is used once more, for the single configuration per model fixed by CV. \Cref{tab:ext,fig:ci} add bootstrap confidence intervals (2\,000 resamples of the test sellers). Two ensembles outside the lecture programme (a 300-tree random forest and gradient boosting, only $\tau$ tuned) are a yardstick, not candidates. Paired bootstrap on the same resamples:
+\paragraph{Test set} The test set had been used once for the baselines (\cref{tab:test}); here it is used once more, for the single configuration per model fixed by CV. \Cref{tab:ext,fig:ci} add bootstrap confidence intervals (2\,000 resamples of the test sellers). Two ensembles outside the lecture programme (random forest: 300 trees, leaf 10; gradient boosting: learning rate 0.05, 150 iterations, 15 leaves; only $\tau$ tuned) are a yardstick, not candidates. Paired bootstrap on the same resamples:
 \begin{itemize}
 \item the baseline tree, KNN and the rules of \cref{sec:exploit} are tied (all intervals of the differences contain 0 and lie within $\pm0.025$), while the tree beats GaussianNB (CI $[0.006,0.052]$);
 \item extended KNN beats baseline KNN by 0.031, CI $[0.013,0.047]$; the extended tree gains 0.007, not significant ($[-0.011,0.025]$), although its CV gain was larger: the baseline tree had been lucky on the test set (CV 0.419, test 0.437);
@@ -124,7 +124,7 @@ A partial correction also restores accuracy (0.45 to 0.52 for KNN), because fewe
 \begin{table*}[t]
 \centering
 \caption{Extended models on the test set, with bootstrap 95\% CI of macro-F1, quadratic-weighted kappa (QWK) and mean absolute error on the ranks (MAE). \emph{Extended}: $\tau$ and attributes chosen by CV.}\label{tab:ext}
-\tabtight{m5_test}
+\tabmid{m5_test}
 \end{table*}
 
 \begin{figure}[t]
@@ -132,6 +132,20 @@ A partial correction also restores accuracy (0.45 to 0.52 for KNN), because fewe
 \includegraphics[width=0.97\linewidth]{m5_test_ci}
 \caption{Test macro-F1 with 95\% CI. Circles: baselines; diamonds: extended; squares: reference ensembles.}\label{fig:ci}
 \end{figure}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.95\textwidth]{m5_extended}
+\caption{Extended models on the test set: confusion matrices (counts and row percentages) and one-vs-rest ROC curves with AUC.}\label{fig:ext}
+\end{figure*}
+
+\begin{table*}[t]
+\centering
+\caption{Extended models on the test set: overall and per-class precision, recall and F1.}\label{tab:extcls}
+\tabmid{m5_extcls}
+\end{table*}
+
+\paragraph{Reading the extended models} \Cref{fig:ext,tab:extcls} repeat the evaluation of \cref{sec:test}. Compared with \cref{fig:conf}, \emph{medium} is recognized more often (tree and KNN: 57--58\% instead of 42--43\%) and \emph{low} is mostly absorbed by it (54\% of the true \emph{low} sellers for the tree, 45\% for KNN). Extreme confusions become rare in one direction: only 3\% (tree) and 8\% (KNN) of the true \emph{high} sellers are called \emph{low}, against 12\% and 21\% before. Precision on \emph{low} stays near one third for all models: whatever the rule, two out of three \emph{low} predictions are wrong. The per-class ROC curves hardly depend on $\tau$ and reflect mostly the engineered attributes: macro AUC rises slightly for all models (KNN 0.642 to 0.658, GaussianNB 0.593 to 0.609, CategoricalNB 0.594 to 0.610, tree 0.629 to 0.634), most visibly on \emph{high} (KNN 0.68 to 0.71). KNN's micro AUC falls (0.735 to 0.714), because $\tau$ changes how scores compare across classes. CategoricalNB finds the most \emph{high} sellers (62\%), at the lowest precision (0.36).
 
 \subsection{What the trees say}\label{sec:tree}
 The baseline tree splits first on size (\attr{n\_listings} $\leq103.5$), which accounts for 62\% of its impurity decrease, followed by price (13\%), share of new (7\%) and mileage (6\%). Its purest large leaf describes \emph{high} sellers: at most 17 listings, mileage below 79k, independent, not mainly sedans (279 sellers, 65\% \emph{high}; base rate 27\%).
@@ -222,7 +236,7 @@ Cost & \textbf{negligible} & 11k distances per query & negligible\\
 \end{tabular}}
 \end{table}
 
-\paragraph{Classification} \textbf{KNN} ($k=151$, $\tau=0.8$) is the best predictor: it leads macro-F1, accuracy and AUC, in CV as on the test set, and is statistically level with the ensembles. The \textbf{Decision Tree} is close, explains itself and costs nothing: it is the model to show to a user, and it has the best ordinal agreement among the lecture models (QWK 0.26). On the baseline grids alone the two are tied and the tree would be preferred. Na\"ive Bayes pays for correlated attributes.
+\paragraph{Classification} \textbf{KNN} ($k=151$, $\tau=0.8$) is the best predictor: it leads macro-F1 in CV and macro-F1, accuracy and AUC on the test set, and is statistically level with the ensembles. The \textbf{Decision Tree} is close, explains itself and costs nothing: it is the model to show to a user, and it has the best ordinal agreement among the lecture models (QWK 0.26). On the baseline grids alone the two are tied and the tree would be preferred. Na\"ive Bayes pays for correlated attributes.
 
 \paragraph{Regression} KNN has the lowest error ($R^2$ 0.913), the Decision Tree regressor (0.903) offers the best trade-off with a small train--test gap (MSE 0.028 vs 0.038), and OLS (0.876) is the most interpretable. Price is strongly determined by the inventory, the rating only weakly.
 

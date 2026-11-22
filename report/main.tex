@@ -21,7 +21,7 @@
 \graphicspath{{../figures/}}
 
 % every text element is set above 9pt
-\newcommand{\tabfont}{\fontsize{9.1}{10.7}\selectfont}
+\newcommand{\tabfont}{\fontsize{9.2}{10.8}\selectfont}
 \captionsetup{font={stretch=0.97},labelfont={bf,color=accent},skip=4pt}
 \DeclareCaptionFont{capfont}{\fontsize{9.2}{10.8}\selectfont}
 \captionsetup{font=capfont}
@@ -46,17 +46,18 @@
 \setcounter{topnumber}{4}\setcounter{dbltopnumber}{4}\setcounter{totalnumber}{6}
 \emergencystretch=1.5em
 
-\newcommand{\attr}[1]{\texttt{\small #1}}
-\newcommand{\code}[1]{\texttt{\small #1}}
-\newcommand{\tab}[1]{{\tabfont\setlength{\tabcolsep}{2.2pt}\input{tables/#1}}}
+\newcommand{\attr}[1]{\texttt{\fontsize{9.3}{11}\selectfont #1}}
+\newcommand{\code}[1]{\texttt{\fontsize{9.3}{11}\selectfont #1}}
+\newcommand{\tab}[1]{{\tabfont\setlength{\tabcolsep}{2.0pt}\input{tables/#1}}}
+\newcommand{\tabmid}[1]{{\tabfont\setlength{\tabcolsep}{3pt}\input{tables/#1}}}
 \newcommand{\tabwide}[1]{{\tabfont\setlength{\tabcolsep}{5pt}\input{tables/#1}}}
-\newcommand{\tabtight}[1]{{\tabfont\setlength{\tabcolsep}{1.45pt}\input{tables/#1}}}
+\newcommand{\tabtight}[1]{{\tabfont\setlength{\tabcolsep}{1.1pt}\input{tables/#1}}}
 \newcommand{\eps}{\varepsilon}
 \newcommand{\Fm}{F1\textsubscript{mac}}
 
 \pagestyle{fancy}\fancyhf{}
-\fancyhead[L]{\small Data Mining 1 -- a.a.\ 2026/2027}
-\fancyhead[R]{\small Seller-Level Vehicle Dataset}
+\fancyhead[L]{\fontsize{9.3}{11}\selectfont Data Mining 1 -- a.a.\ 2026/2027}
+\fancyhead[R]{\fontsize{9.3}{11}\selectfont Seller-Level Vehicle Dataset}
 \fancyfoot[C]{\thepage}
 \renewcommand{\headrulewidth}{0.3pt}
 

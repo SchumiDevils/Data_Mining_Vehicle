@@ -54,6 +54,13 @@ for n, lab in ROWS:
 write("m5_test", "@{}lrrlrrrrrrrr@{}",
       r"Model & CV \Fm & Test \Fm & 95\% CI & Acc. & F1$_\mathrm{wei}$ & AUC$_\mathrm{mac}$ & R$_\mathrm{low}$ & R$_\mathrm{med}$ & R$_\mathrm{high}$ & QWK & MAE", rows, (3, 7, 8, 10))
 
+# ---- extended models, per class
+e = read("m5_extended_class_metrics", index_col=0)
+rows = [[n] + [num(r[k], 3) for k in ("accuracy", "macro-P", "macro-R", "macro-F1", "weighted-F1", "AUC macro", "AUC micro")]
+        + [num(r[f"{a_} {c_}"], 2) for c_ in ("low", "medium", "high") for a_ in ("P", "R", "F1")] for n, r in e.iterrows()]
+write("m5_extcls", "@{}lrrrrrrr|rrr|rrr|rrr@{}",
+      r" & & & & & & & & \multicolumn{3}{c|}{\textit{low}} & \multicolumn{3}{c|}{\textit{medium}} & \multicolumn{3}{c}{\textit{high}} \\ Model & Acc. & P$_\mathrm{mac}$ & R$_\mathrm{mac}$ & F1$_\mathrm{mac}$ & F1$_\mathrm{wei}$ & AUC$_\mathrm{mac}$ & AUC$_\mathrm{mic}$ & P & R & F1 & P & R & F1 & P & R & F1", rows)
+
 # ---- size effect
 s = read("m5_size_effect", index_col=0)
 rows = [[{"all": "all sellers"}.get(k, k), num(r["n"], 0), num(r["rho(size, rating)"], 2), f"{r['high % small']:.0f} / {r['high % large']:.0f}", f"{r['low % small']:.0f} / {r['low % large']:.0f}"] for k, r in s.iterrows()]

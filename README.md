@@ -246,7 +246,7 @@ To maximize project quality and target the content-based bonus points (2 of the 
 ├── src/                      # Shared preprocessing, metrics, and plotting utilities (plot_style.py)
 ├── figures/                  # Exported vector figures (PDF + PNG preview) for LaTeX report
 ├── tables/                   # CSV tables backing the report's tables
-└── report/                   # LaTeX report (main.tex, sections/, make_tables.py; build with latexmk -pdf -outdir=build main.tex)
+└── report/                   # LaTeX report (main.tex, sections/, make_tables.py, make_figures.py; build with latexmk -pdf -outdir=build main.tex)
 ```
 
 ### Environment
@@ -265,7 +265,7 @@ To maximize project quality and target the content-based bonus points (2 of the 
 ### Module 3 outputs
 - `data/processed/split.csv`: the stratified 80/20 train/test split (`set` = train/test per `sp_id`); **Module 4's rule-based classifier must reuse it**.
 - `src/m3_utils.py`: `PriorCorrectedKNN` (KNN with a class-prior-corrected decision rule; also works around a scikit-learn 1.6 bug with string labels).
-- Classification (test macro-F1 / macro AUC): Decision Tree 0.437 / 0.63 (pruned, depth 5, balanced), KNN 0.433 / 0.64 (k=151, p=1, prior-corrected), CategoricalNB 0.414, GaussianNB 0.407; majority baseline 0.236. Best overall: pruned DT.
+- Classification (test macro-F1 / macro AUC): Decision Tree 0.437 / 0.63 (pruned, depth 5, balanced), KNN 0.433 / 0.64 (k=151, p=1, prior-corrected), CategoricalNB 0.414, GaussianNB 0.407; majority baseline 0.236. Best overall within the Module 3 grids: pruned DT (the report's final choice is the extended KNN, see Section 5 outputs).
 - Regression on log1p(price): single OLS on mileage R² 0.75; multiple (mileage, horsepower, width, pct_is_new): OLS 0.876, DT 0.903, KNN 0.913.
 
 ### Module 4 outputs
@@ -278,13 +278,13 @@ To maximize project quality and target the content-based bonus points (2 of the 
 ### Section 5 outputs (notebook 05, report)
 - `notebooks/05_quality_extensions.ipynb` + `src/m5_utils.py`: cluster null model, stability and X-Means; M3 ablations; 12 engineered features; tunable prior correction P(c|x)/P(c)^τ; nested CV; bootstrap CIs; ordinal, learning-curve and agreement analyses; binning and regression ablations. Modules 1–4 outputs are unchanged.
 - **Do not set `RECOMPUTE = True` on a laptop without care:** the full run needs several GB of RAM and ~15 min of CPU (keep `N_JOBS` ≤ 2). The default loads `tables/m5_*.csv` and takes seconds.
-- Extended classifiers (test macro-F1, 95% CI): KNN τ = 0.8 + engineered **0.464** [0.443, 0.483]; DT τ = 0.7 (16 leaves) 0.444; statistically level with the random forest (0.475) and gradient boosting (0.466), used only as references. Cost: lower `low` recall.
-- **Simpson's paradox:** odds ratio of `high` for franchise vs independent is 0.53 crude, 1.73 adjusted for size deciles. Seller size, not dealer type, drives the rating.
+- Extended classifiers (test macro-F1, 95% CI): KNN τ = 0.8 + engineered **0.464** [0.443, 0.483]; DT τ = 0.7 (16 leaves) 0.444. KNN is statistically level with the random forest (0.475) and gradient boosting (0.466), used only as references; the DT is significantly below the random forest (−0.031). Cost: lower `low` recall.
+- **Simpson's paradox:** odds ratio of `high` for franchise vs independent is 0.53 crude, 1.73 adjusted for size deciles. The marginal advantage of independents is a size effect; at equal size franchises are rated `high` more often (observational data, no causal claim).
 - Random forest, gradient boosting, nested CV, bootstrap, ordinal decomposition and Mantel–Haenszel may be outside the lectures: **email the instructor before submitting** (Section 2, rule 5).
-- Report: 18 counted pages. Fill in `report/authors.tex` and rename the PDF before submission.
+- Report: 19 counted pages. Fill in `report/authors.tex` and rename the PDF before submission.
 
 ### Engineering & Oral Exam Discipline
-- **Reproducibility:** Fix `random_state=42` across all splits, CV folds, and stochastic algorithms.
+- **Reproducibility:** Fix `random_state=42` across all splits, CV folds, and stochastic algorithms (notebook 05 uses other fixed seeds for the inner nested-CV folds, subsamples and null datasets, so that they differ from the main folds).
 - **Zero Data Leakage:** Fit all imputers, scalers, encoders, discretizers, and rule extractors strictly on training partitions whenever evaluating predictive performance.
 - **Unified Visual Style:** Export high-resolution vector plots (`PDF`/`SVG`) with consistent fonts, legible axis labels, and unified class/cluster color palettes.
 - **Shared Understanding:** Every team member should understand all 4 modules, including algorithms, formulas, and every methodological choice made in the report.
@@ -293,9 +293,9 @@ To maximize project quality and target the content-based bonus points (2 of the 
 
 ## 7. Project Quality & Compliance Checklist
 
-- [ ] **Submission:** mid-draft by 15/11/2026, final by 31/12/2026; emailed to both instructors with the correct subject and `Project_Surname1_Surname2.pdf` file name.
-- [ ] **Report Constraints:** ≤20 counted pages (excluding Title Page & Index); font size >9pt; PDF only; every plot/table is legible, referenced, and commented; every choice and tested parameter range is documented and justified.
-- [ ] **Module 1:** Variable semantics table; univariate & bivariate stats/plots; missing values, duplicates, inconsistencies, and outliers audited and resolved; transformations justified; correlation heatmap and feature elimination explained.
-- [ ] **Module 2:** K-Means (mandatory), DBSCAN (mandatory), Hierarchical with *multiple dendrograms* (mandatory); attributes, distances, and parameters justified; full comparative "best algorithm" discussion across aggregate metrics, cluster distributions, and dataset geometry.
-- [ ] **Module 3:** `seller_rating_class` classified with Decision Trees, KNN, and Naïve Bayes; Confusion Matrices, Accuracy, Precision, Recall, $F_1$-score, and ROC curves reported; Single Linear Regression + Multiple Regression on the **same continuous target** with Linear + **≥2 non-linear** models evaluated by **MSE** and **$R^2$**; tree/model insights and "best" discussion included.
-- [ ] **Module 4:** Frequent patterns across `min_sup` (quantitative vs. $k$/`min_sup` + qualitative); Association rules across `min_conf` (quantitative vs. $k$/`min_conf`, **confidence & lift histograms**, + qualitative); concrete rule exploitation (target prediction and/or missing-value imputation) quantitatively evaluated.
+- [ ] **Submission** *(open: `report/authors.tex`, file name, instructor email on non-lecture methods; the 15/11 date has passed, so check whether the mid-draft was sent)*: mid-draft by 15/11/2026, final by 31/12/2026; emailed to both instructors with the correct subject and `Project_Surname1_Surname2.pdf` file name.
+- [x] **Report Constraints** *(checked 22/11/2026: 19 counted pages, text/tables/captions > 9pt, 57 figures and tables all referenced; labels inside some figures are 5–8pt)*: ≤20 counted pages (excluding Title Page & Index); font size >9pt; PDF only; every plot/table is legible, referenced, and commented; every choice and tested parameter range is documented and justified.
+- [x] **Module 1:** Variable semantics table; univariate & bivariate stats/plots; missing values, duplicates, inconsistencies, and outliers audited and resolved; transformations justified; correlation heatmap and feature elimination explained.
+- [x] **Module 2:** K-Means (mandatory), DBSCAN (mandatory), Hierarchical with *multiple dendrograms* (mandatory); attributes, distances, and parameters justified; full comparative "best algorithm" discussion across aggregate metrics, cluster distributions, and dataset geometry.
+- [x] **Module 3:** `seller_rating_class` classified with Decision Trees, KNN, and Naïve Bayes; Confusion Matrices, Accuracy, Precision, Recall, $F_1$-score, and ROC curves reported; Single Linear Regression + Multiple Regression on the **same continuous target** with Linear + **≥2 non-linear** models evaluated by **MSE** and **$R^2$**; tree/model insights and "best" discussion included.
+- [x] **Module 4:** Frequent patterns across `min_sup` (quantitative vs. $k$/`min_sup` + qualitative); Association rules across `min_conf` (quantitative vs. $k$/`min_conf`, **confidence & lift histograms**, + qualitative); concrete rule exploitation (target prediction and/or missing-value imputation) quantitatively evaluated.

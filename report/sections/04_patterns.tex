@@ -38,7 +38,7 @@ Missing values simply produce no item. Items with support above 0.9 (\emph{trans
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=0.97\textwidth]{m4_rules_quant}
+\includegraphics[width=0.97\textwidth]{report_rules_quant}
 \caption{Association rules: counts by \code{min\_conf} and length $k$; histograms of confidence and lift for \code{min\_conf}$\,=0.6$; support--confidence--lift scatter (6\,000 sampled rules).}\label{fig:rules}
 \end{figure*}
 
@@ -58,7 +58,7 @@ Missing values simply produce no item. Items with support above 0.9 (\emph{trans
 \tabtight{m4_rating}
 \end{table}
 
-\paragraph{Sensitivity to binning} \Cref{tab:bin} repeats mining and a smaller rule classifier ($s=0.01$, $L=3$, training folds only) under six binnings. Equal-width bins fail, as argued in \cref{sec:enc}: one bin holds up to 100\% of the sellers, lift shrinks and the classifier falls to 0.26--0.29. Two bins triple the itemsets with less specific patterns. Four equal-frequency bins predict better than three (0.420 vs 0.390) with half the itemsets: a possible improvement that we did not tune further, because it was found after the test set had been read. We keep tertiles, whose \emph{low}/\emph{mid}/\emph{high} labels are readable in all descriptive rules.
+\paragraph{Sensitivity to binning} \Cref{tab:bin} repeats mining and a smaller rule classifier ($s=0.01$, $L=3$, training folds only) under six binnings. Equal-width bins fail, as argued in \cref{sec:enc}: one bin holds up to 100\% of the sellers, lift shrinks and the classifier falls to 0.26--0.29. Two bins almost triple the itemsets, with less specific patterns. Four equal-frequency bins predict better than three (0.420 vs 0.390) with half the itemsets: a possible improvement that we did not tune further, because it was found after the test set had been read. We keep tertiles, whose \emph{low}/\emph{mid}/\emph{high} labels are readable in all descriptive rules.
 
 \begin{table*}[t]
 \centering
@@ -83,7 +83,7 @@ Missing values simply produce no item. Items with support above 0.9 (\emph{trans
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=0.93\textwidth]{m4_rule_classifier}
+\includegraphics[width=0.93\textwidth]{report_rule_classifier}
 \caption{Test macro-F1 of the rule-based and the \cref{sec:m3} baseline-grid classifiers (left); effect of aggregation and antecedent length in CV (right).}\label{fig:rulecls}
 \end{figure*}
 
